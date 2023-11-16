@@ -136,3 +136,6 @@ class HomeScreen(Screen):
         print(f"Stuff from search bar: {search}")
 
 
+if __name__ == '__main__':
+    SignUpApp().run()
+
