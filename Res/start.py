@@ -79,7 +79,7 @@ class NewOrReturningWindow(Screen):
         self.manager.current = SignIn.SignUpApp().run()
 
 
-class SignUpApp(App):
+class SignUpApp(Screen):
     def build(self):
         self.title = 'Sign In!'
         layout = BoxLayout(orientation='vertical', padding=20, spacing=10)
@@ -208,28 +208,78 @@ class CreateAnAccWindow(Screen):
         self.add_widget(done_button)
 
     def on_done_button_click(self, instance):
-        self.manager.current = "blank_screen"
+        self.manager.current = "bubble_screen"
 
 
-# class BlankScreen(Screen):
-#     def __init__(self, **kwargs):
-#         super().__init__(**kwargs)
+# # bubble page
+# class Myapp(App):
+#     def build(self):
+#         # create float layout
+#         self.root = FloatLayout()
+#         Window.clearcolor = (0, 0, 0, 0)
 #
-#     bubble_button = Button(
-#         text="start the application introduction",
-#         size_hint=(None, None),
-#         size=(550, 50),
-#         pos_hint={'center_x': 0.5, 'y': 0.1},
-#         on_press=self.on_bubble_button_click
-#     )
+#         # add button to layout
+#         # button = Button(text = "Press here to read the rules of BetterGUIlds...",
+#         # on_press = self.show_bubble)
 #
-#     def on_bubble_button_click(self, instance):
-#         self.manager.current = Bubble.Myapp.run()
+#         # now add button to layout
+#         # self.root.add_widget(button)
 #
+#         # return self.root
+#
+#         bubble1 = Bubble(orientation="horizontal",
+#                          size_hint=(None, None),
+#                          size=(800, 350),
+#                          # pos_hint = {'center_x': 0.5, 'center_y': 0.5})
+#                          pos_hint={'x': 0.05, 'y': 0.8})
+#
+#         bubble2 = Bubble(orientation="horizontal",
+#                          size_hint=(None, None),
+#                          size=(800, 350),
+#                          # pos_hint = {'center_x': 0.5, 'center_y': 0.9})
+#                          pos_hint={'x': 0.4, 'y': 0.45})
+#
+#         bubble3 = Bubble(orientation="horizontal",
+#                          size_hint=(None, None),
+#                          size=(800, 350),
+#                          pos_hint={'center_x': 0.85, 'center_y': 0.1})
+#
+#         # now add buttons to bubble (cut copy and paste)
+#         button1 = BubbleButton(text="1) Guilds are a place for like-minded\npeople to come together.", font_size='20sp')
+#         button2 = BubbleButton(
+#             text="2) Make posts, send messages, and\nparticipate in guild events!\nAn active guild is a thriving "
+#                  "guild :)",
+#             font_size='20sp')
+#         button3 = BubbleButton(
+#             text="3) Guild space is limited!\nMaximum size of a guild is 25 members!\nFight for your place in the "
+#                  "guild!\nNobody likes a spectator!",
+#             font_size='20sp')
+#
+#         # button3 = BubbleButton(text = "Paste")
+#
+#         # now add buttons to bubble
+#         bubble1.add_widget(button1)
+#         bubble2.add_widget(button2)
+#         bubble3.add_widget(button3)
+#         # bubble.add_widget(button3)
+#
+#         # finally add bubble to root(float layout)
+#         self.root.add_widget(bubble1)
+#         self.root.add_widget(bubble2)
+#         self.root.add_widget(bubble3)
 
-class Myapp(App):
-    def build(self):
-        # create float layout
+
+class BubbleScreen(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        bubble_button = Button(
+            text="continue",
+            size_hint=(None, None),
+            size=(480, 50),
+            pos_hint={'center_x': 0.5, 'y': 0.1},
+            on_press=self.on_bubble_button_click
+        )
         self.root = FloatLayout()
         Window.clearcolor = (0, 0, 0, 0)
 
@@ -282,6 +332,10 @@ class Myapp(App):
         self.root.add_widget(bubble1)
         self.root.add_widget(bubble2)
         self.root.add_widget(bubble3)
+        self.add_widget(bubble_button)
+
+    def on_bubble_button_click(self, instance):
+        self.manager.current = bubble.Myapp().run()
 
 
 class HomeScreen(App):
@@ -432,11 +486,13 @@ class MyApp(App):
         welcome_screen = WelcomeScreen(name="welcome")
         new_or_returning_window = NewOrReturningWindow(name="new_or_returning_window")
         create_an_acc_window = CreateAnAccWindow(name="create_an_acc_window")
+        bubble_screen = BubbleScreen(name="bubble_screen")
         # blank_screen = BlankScreen(name="blank_screen")
 
         screen_manager.add_widget(welcome_screen)
         screen_manager.add_widget(new_or_returning_window)
         screen_manager.add_widget(create_an_acc_window)
+        screen_manager.add_widget(bubble_screen)
         # screen_manager.add_widget(blank_screen)
 
         return screen_manager
