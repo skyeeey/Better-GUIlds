@@ -1,5 +1,11 @@
 #DO NOT LINK THIS PAGE, I PUT IN HERE BY ACCIDENT
 
+from kivy.properties import StringProperty
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.textinput import TextInput
+
+
 class HomeScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

@@ -138,9 +138,6 @@ class HomeScreen(App):
 
  
   
- 
-     
-            
 
         scrollable_grid = ScrollableGrid(
             pos_hint={'x': 0.3,'y': -0.1}
