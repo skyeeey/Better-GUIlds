@@ -211,21 +211,21 @@ class CreateAnAccWindow(Screen):
         self.manager.current = "blank_screen"
 
 
-class BlankScreen(Screen):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-    bubble_button = Button(
-        text="start the application introduction",
-        size_hint=(None, None),
-        size=(550, 50),
-        pos_hint={'center_x': 0.5, 'y': 0.1},
-        on_press=self.on_bubble_button_click
-    )
-
-    def on_bubble_button_click(self, instance):
-        self.manager.current = Bubble()..run()
-
+# class BlankScreen(Screen):
+#     def __init__(self, **kwargs):
+#         super().__init__(**kwargs)
+#
+#     bubble_button = Button(
+#         text="start the application introduction",
+#         size_hint=(None, None),
+#         size=(550, 50),
+#         pos_hint={'center_x': 0.5, 'y': 0.1},
+#         on_press=self.on_bubble_button_click
+#     )
+#
+#     def on_bubble_button_click(self, instance):
+#         self.manager.current = Bubble.Myapp.run()
+#
 
 class Myapp(App):
     def build(self):
@@ -432,12 +432,12 @@ class MyApp(App):
         welcome_screen = WelcomeScreen(name="welcome")
         new_or_returning_window = NewOrReturningWindow(name="new_or_returning_window")
         create_an_acc_window = CreateAnAccWindow(name="create_an_acc_window")
-        blank_screen = BlankScreen(name="blank_screen")
+        # blank_screen = BlankScreen(name="blank_screen")
 
         screen_manager.add_widget(welcome_screen)
         screen_manager.add_widget(new_or_returning_window)
         screen_manager.add_widget(create_an_acc_window)
-        screen_manager.add_widget(blank_screen)
+        # screen_manager.add_widget(blank_screen)
 
         return screen_manager
 
