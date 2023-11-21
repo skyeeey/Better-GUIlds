@@ -171,13 +171,13 @@ class GuildScreen(App):
 
                 # First row is going to be occupied by our scrollable label
                 # We want it be take 90% of app height
-                self.history = ScrollableLabel(height=Window.size[1]*0.7, size_hint_y=None)
+                self.history = ScrollableLabel(height=Window.size[1]*0.5, size_hint_y=None, width=Window.size[0]*0.5, size_hint_x=None)
                 self.add_widget(self.history)
 
                 # In the second row, we want to have input fields and Send button
                 # Input field should take 80% of window width
                 # We also want to bind button click to send_message method
-                self.new_message = TextInput(width=Window.size[0]*0.8, height=Window.size[1]*0.2, multiline=False)
+                self.new_message = TextInput(width=Window.size[0]*0.8,size_hint_x = None, hieght = Window.size[1]*.2, size_hint_y= None, multiline=False)
                 self.send = Button(text="Send")
                 self.send.bind(on_press=self.send_message)
 
