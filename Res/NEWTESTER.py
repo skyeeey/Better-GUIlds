@@ -18,18 +18,20 @@ from kivy.uix.button import Button
 from kivy.uix.bubble import Bubble, BubbleButton
 from kivy.core.window import Window
 
+
 class HomeScreen(App):
+
     def build(self):
         self.title = 'Home Screen'
         self.root = FloatLayout()
-        Window.clearcolor = (0,0,0,0)
+        Window.clearcolor = (0, 0, 0, 0)
         # Use a Label for the description
 
         search_input = TextInput(
             hint_text='Search for a guild...',
-            size_hint = (None, None),
-            size = (770, 50),
-            pos_hint={'x': 0.3,'y': 0.95}
+            size_hint=(None, None),
+            size=(770, 50),
+            pos_hint={'x': 0.3, 'y': 0.95}
         )
 
         submit = Button(
@@ -41,60 +43,58 @@ class HomeScreen(App):
         )
 
         class imageButtons():
-        # Make Sure Image is in directory
+            # Make Sure Image is in directory
             profileButton = Button(
-                background_normal = 'UserProfileButton.png',
+                background_normal='UserProfileButton.png',
                 pos_hint={'x': .9, 'y': 0.9},
-                size_hint=(None, None)
-                )
-            
-            BoardgameButton = Button(
-                color =(1, 0, .65, 1),
-                background_normal = 'DummyGuild.png',
-                size=(800, 200),
                 size_hint=(None, None)
             )
 
+            BoardgameButton = Button(
+                color=(1, 0, .65, 1),
+                background_normal='DummyGuild.png',
+                size=(800, 200),
+                size_hint=(None, None)
+                # on_press = self.on_boardgame_button_click
+            )
+
             DummyGuild = Button(
-                color =(1, 0, .65, 1),
-                background_normal = 'ActualDummyGuild.png',
+                color=(1, 0, .65, 1),
+                background_normal='ActualDummyGuild.png',
                 size=(800, 200),
                 size_hint=(None, None)
             )
 
             PlankGuild = Button(
-                color =(1, 0, .65, 1),
-                background_normal = 'PlankGuild.png',
+                color=(1, 0, .65, 1),
+                background_normal='PlankGuild.png',
                 size=(800, 200),
                 size_hint=(None, None)
             )
 
         class GuildBannerMenu():
             createGuild = Button(
-            text="+ Guild",
-            size_hint=(None, None),
-            size=(300, 100),
-            pos_hint={'x': 0.0,'y': 0.8},
-            # on_press=self.submit
+                text="+ Guild",
+                size_hint=(None, None),
+                size=(300, 100),
+                pos_hint={'x': 0.0, 'y': 0.8},
+                # on_press=self.submit
             )
-            
+
             myGuilds = Button(
-            text="My Guild",
-            size_hint=(None, None),
-            size=(300, 100),
-            pos_hint={'x': 0.0,'y': 0.7},
-            # on_press=self.submit
-        )
+                text="My Guild",
+                size_hint=(None, None),
+                size=(300, 100),
+                pos_hint={'x': 0.0, 'y': 0.7},
+                # on_press=self.submit
+            )
             people = Button(
-            text="My People",
-            size_hint=(None, None),
-            size=(300, 100),
-            pos_hint={'x': 0.0,'y': 0.6},
-            # on_press=self.submit
-        )
-            
-            
-        
+                text="My People",
+                size_hint=(None, None),
+                size=(300, 100),
+                pos_hint={'x': 0.0, 'y': 0.6},
+                # on_press=self.submit
+            )
 
         # class GuildScrolling():
         #     guilds = GridLayout(cols=1, spacing=10, size_hint_y=None)
@@ -109,19 +109,15 @@ class HomeScreen(App):
 
         #     ScrollingGuilds.add_widget(guilds)
 
-
-
-
         class ScrollableGrid(ScrollView):
             def __init__(self, **kwargs):
                 super(ScrollableGrid, self).__init__(**kwargs)
- 
+
                 # Create a GridLayout
                 self.layout = GridLayout(cols=1, spacing=10, size_hint_y=None)
                 self.layout.bind(minimum_height=self.layout.setter('height'))
- 
-                    
-                self.layout.add_widget(imageButtons.PlankGuild)    
+
+                self.layout.add_widget(imageButtons.PlankGuild)
                 self.layout.add_widget(imageButtons.BoardgameButton)
                 self.layout.add_widget(imageButtons.DummyGuild)
 
@@ -130,30 +126,22 @@ class HomeScreen(App):
                     button_text = f"Fake guild {i + 4}"
                     btn = Button(text=button_text, size=(800, 200), size_hint=(None, None))
                     self.layout.add_widget(btn)
- 
+
                 # Add the GridLayout to the ScrollView
                 self.add_widget(self.layout)
 
-
-
- 
-  
-
         scrollable_grid = ScrollableGrid(
-            pos_hint={'x': 0.3,'y': -0.1}
+            pos_hint={'x': 0.3, 'y': -0.1}
         )
 
         class FakeGuildButton():
             clickable = Button(
-            text="+ Guild",
-            size_hint=(None, None),
-            size=(300, 100),
-            pos_hint={'x': 0.0,'y': 0.8},
-            # on_press=self.submit
+                text="+ Guild",
+                size_hint=(None, None),
+                size=(300, 100),
+                pos_hint={'x': 0.0, 'y': 0.8},
+                # on_press=self.submit
             )
-
-        
-             
 
         self.root.add_widget(search_input)
         self.root.add_widget(submit)
@@ -168,6 +156,13 @@ class HomeScreen(App):
     #     # Here, you can process the submitted weight and height as needed
     #     # For example, you can print them to the console
     #     print(f"Stuff from search bar: {search}")
+
+# class BoardDimension(Screen):
+#     def __init__(self, **kwargs):
+#         super().__init__(**kwargs)
+#
+#
+
 
 if __name__ == '__main__':
     HomeScreen().run()

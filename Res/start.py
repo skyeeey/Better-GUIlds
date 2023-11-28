@@ -115,14 +115,14 @@ class SignUpApp(Screen):
             username = username_input.text
             password = password_input.text
             message_label.text = f'Signing in with: Username: {username} and entered password'
-            sign_up_button.bind(on_press="home_screen")
+            sign_up_button.bind(on_press="bubble_screen")
 
         # RGB values for CornflowerBlue (#6495ED)
         cornflower_blue_rgb = (100 / 255.0, 149 / 255.0, 237 / 255.0, 1.0)
 
         # Create sign-up button
         sign_up_button = Button(text='Sign Into Your BetterGUIlds Account', size_hint_y=None, height=40,
-                                on_press=sign_up_button_callback, font_size='17sp')
+                                on_press="sign_up_button_callback", font_size='17sp')
         sign_up_button.background_color = cornflower_blue_rgb
         sign_up_button.color = (1, 1, 1, 1)  # Set text color to white
 
