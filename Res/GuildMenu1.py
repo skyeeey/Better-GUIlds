@@ -7,6 +7,7 @@ from kivy.uix.scrollview import ScrollView
 from kivy.properties import StringProperty
 from kivy.core.window import Window
 from kivy.uix.dropdown import DropDown
+from kivy.uix.floatlayout import FloatLayout
 
 
 class ScrollableLabel(ScrollView):
@@ -20,7 +21,7 @@ class ChatPage(BoxLayout):
 
         self.history = ScrollableLabel(height=Window.size[1] * 0.5, size_hint_y=None)
         self.new_message = TextInput(width=Window.size[0] * 0.8, size_hint_x=None, height=Window.size[1] * .2,
-                                     size_hint_y=None, multiline=False)
+                                     size_hint_y=None, multiline=False, hint_text = 'Type a message here...')
         self.send = Button(text="Send")
         self.send.bind(on_release=self.on_send_message)
 
@@ -34,6 +35,7 @@ class ChatPage(BoxLayout):
     def on_send_message(self, instance):
         message = self.new_message.text
         if message:
+            self.history.text.font_size =(100)
             self.history.text += '\n' + message
             self.new_message.text = ""
 
@@ -41,7 +43,7 @@ class ChatPage(BoxLayout):
 class GuildScreen(App):
     def build(self):
         self.title = 'GuildMenu'
-        self.root = BoxLayout(orientation='vertical')
+        self.root = FloatLayout()
         Window.clearcolor = (0, 0, 0, 0)
 
         search_input = TextInput(
@@ -80,30 +82,27 @@ class GuildScreen(App):
                 pos_hint={'center_x': 0.5, 'center_y': 0.9}
             )
 
-            chat_button = Button(
-                background_normal='FakeDiscord.png',
-                pos_hint={'x': 0.3, 'y': 0.3},
-                size_hint=(0.65, 0.4)
-            )
-
         class GuildBannerMenu:
             create_guild = Button(
                 text="+ Guild",
+                font_size=(100),
                 size_hint=(None, None),
-                size=(300, 100),
+                size=(500, 200),
                 pos_hint={'x': 0.0, 'y': 0.8},
             )
 
             my_guilds = Button(
                 text="My Guild",
+                font_size=(100),
                 size_hint=(None, None),
-                size=(300, 100),
+                size=(500, 200),
                 pos_hint={'x': 0.0, 'y': 0.7},
             )
             people = Button(
                 text="My People",
+                font_size=(100),
                 size_hint=(None, None),
-                size=(300, 100),
+                size=(500, 200),
                 pos_hint={'x': 0.0, 'y': 0.6},
             )
 
@@ -128,7 +127,7 @@ class GuildScreen(App):
         )
 
         history = ScrollableLabel(
-            pos_hint={'x': 0.3, 'y': .5},
+            pos_hint={'x': 0.5, 'y': .5},
         )
 
         self.root.add_widget(search_input)
