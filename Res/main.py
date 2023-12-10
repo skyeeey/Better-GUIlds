@@ -23,14 +23,14 @@ class WelcomeScreen(Screen):
 
         welcome_label = Label(
             text="Welcome to BetterGUIlds",
-            font_size=35,
+            font_size=77,
             pos_hint={'center_x': 0.5, 'center_y': 0.7}
         )
 
         start_button = Button(
             text="Start",
             size_hint=(None, None),
-            size=(100, 50),
+            size=(100, 80),
             pos_hint={'center_x': 0.5, 'y': 0.1},
             on_press=self.on_start_button_click
         )
@@ -48,27 +48,27 @@ class BubbleScreen(Screen):
 
         bubble1_text_label = Label(
             text='Guilds are a place for like-minded\npeople to come together.',
-            font_size=35,
+            font_size=40,
             pos_hint={'center_x': 0.3, 'center_y': 0.8}
         )
 
         bubble2_text_label = Label(
             text='Make posts, send messages, and\nparticipate in guild events!\nAn active guild is a thriving.',
-            font_size=35,
+            font_size=40,
             pos_hint={'center_x': 0.7, 'center_y': 0.56}
         )
 
         bubble3_text_label = Label(
             text='Guild space is limited!\nMaximum size of a guild is 25 members!\nFight for your place in the '
                  'guild!\nNobody likes a spectator!',
-            font_size=35,
+            font_size=40,
             pos_hint={'center_x': 0.45, 'center_y': 0.3}
         )
 
         continue_button = Button(
             text="I'm ready to use BetterGUIlds now!",
             size_hint=(None, None),
-            size=(580, 50),
+            size=(580, 80),
             pos_hint={'center_x': 0.70, 'y': 0.12},
             on_press=self.on_continue_button_click
         )
@@ -76,7 +76,7 @@ class BubbleScreen(Screen):
         exit_button = Button(
             text="I'm not interested",
             size_hint=(None, None),
-            size=(280, 50),
+            size=(280, 80),
             pos_hint={'center_x': 0.20, 'y': 0.12},
             on_press=self.on_exit_button_click
         )
@@ -100,7 +100,7 @@ class NewOrReturningWindow(Screen):
 
         newOrReturning_label = Label(
             text="Are you a new or returning user?",
-            font_size=45,
+            font_size=50,
             pos_hint={'center_x': 0.5, 'center_y': 0.7}
         )
 
@@ -137,21 +137,21 @@ class SignInWindow(Screen):
 
         create_label = Label(
             text="Sign in with your BetterGuild Account",
-            font_size=35,
+            font_size=50,
             pos_hint={'center_x': 0.5, 'center_y': 0.8}
         )
 
         done_button = Button(
             text="Login with this username and password",
             size_hint=(None, None),
-            size=(550, 50),
+            size=(550, 65),
             pos_hint={'center_x': 0.5, 'y': 0.1},
             on_press=self.on_done_button_click
         )
 
         username_text_label = Label(
             text='Your Username',
-            font_size=30,
+            font_size=50,
             pos_hint={'center_x': 0.3, 'center_y': 0.7}
         )
 
@@ -159,13 +159,13 @@ class SignInWindow(Screen):
         self.moreUN_text_input = TextInput(
             hint_text='Type here',
             size_hint=(None, None),
-            size=(600, 50),
+            size=(600, 65),
             pos_hint={'center_x': 0.7, 'center_y': 0.7}
         )
 
         password_text_label = Label(
             text='Your Password',
-            font_size=30,
+            font_size=50,
             pos_hint={'center_x': 0.3, 'center_y': 0.5}
         )
 
@@ -173,13 +173,13 @@ class SignInWindow(Screen):
         self.morePW_text_input = TextInput(
             hint_text='Type here',
             size_hint=(None, None),
-            size=(600, 50),
+            size=(600, 65),
             pos_hint={'center_x': 0.7, 'center_y': 0.5}
         )
 
         reenter_password_text_label = Label(
             text='Re-enter Your Password',
-            font_size=30,
+            font_size=50,
             pos_hint={'center_x': 0.3, 'center_y': 0.3}
         )
 
@@ -187,7 +187,7 @@ class SignInWindow(Screen):
         self.moreRP_text_input = TextInput(
             hint_text='Type here',
             size_hint=(None, None),
-            size=(600, 50),
+            size=(600, 65),
             pos_hint={'center_x': 0.7, 'center_y': 0.3}
         )
 
@@ -210,21 +210,21 @@ class CreateAnAccWindow(Screen):
 
         create_label = Label(
             text="Create an Account",
-            font_size=35,
+            font_size=60,
             pos_hint={'center_x': 0.5, 'center_y': 0.8}
         )
 
         done_button = Button(
             text="Done and create an account now",
             size_hint=(None, None),
-            size=(480, 50),
+            size=(480, 80),
             pos_hint={'center_x': 0.5, 'y': 0.1},
             on_press=self.on_done_button_click
         )
 
         username_text_label = Label(
             text='Create Your Username',
-            font_size=30,
+            font_size=60,
             pos_hint={'center_x': 0.3, 'center_y': 0.7}
         )
 
@@ -232,13 +232,13 @@ class CreateAnAccWindow(Screen):
         self.moreUN_text_input = TextInput(
             hint_text='Type here',
             size_hint=(None, None),
-            size=(600, 50),
+            size=(600, 80),
             pos_hint={'center_x': 0.7, 'center_y': 0.7}
         )
 
         password_text_label = Label(
             text='Create Your Password',
-            font_size=30,
+            font_size=60,
             pos_hint={'center_x': 0.3, 'center_y': 0.5}
         )
 
@@ -246,13 +246,13 @@ class CreateAnAccWindow(Screen):
         self.morePW_text_input = TextInput(
             hint_text='Type here',
             size_hint=(None, None),
-            size=(600, 50),
+            size=(600, 80),
             pos_hint={'center_x': 0.7, 'center_y': 0.5}
         )
 
         reenter_password_text_label = Label(
             text='Re-enter Your Password',
-            font_size=30,
+            font_size=60,
             pos_hint={'center_x': 0.3, 'center_y': 0.3}
         )
 
@@ -260,7 +260,7 @@ class CreateAnAccWindow(Screen):
         self.moreRP_text_input = TextInput(
             hint_text='Type here',
             size_hint=(None, None),
-            size=(600, 50),
+            size=(600, 80),
             pos_hint={'center_x': 0.7, 'center_y': 0.3}
         )
 
@@ -284,7 +284,7 @@ class HomeScreen(Screen):
         done_button = Button(
             text="Home",
             size_hint=(None, None),
-            size=(500, 50),
+            size=(500, 80),
             pos_hint={'center_x': 0.5, 'y': 0.1},
             on_press=self.on_done_button_click
         )
