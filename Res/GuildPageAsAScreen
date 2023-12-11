@@ -11,47 +11,7 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.togglebutton import ToggleButton
 from kivy.core.window import Window
 
-class ScrollableLabel(ScrollView):
-    text = StringProperty('')
 
-    def __init__(self, **kwargs):
-        super(ScrollableLabel, self).__init__(**kwargs)
-        self.label = Label(text='', color=(1, 0, 0, 1), font_size=(100))
-        self.label.bind(size=self._update_label)
-        self.add_widget(self.label)
-
-    def _update_label(self, instance, value):
-        self.label.text_size = (self.width, None)
-        self.label.texture_update()
-        self.height = self.label.texture_size[1]
-
-    def update_text(self, new_text):
-        self.label.text += '\n' + new_text
-
-class ChatPage(BoxLayout):
-    def __init__(self, **kwargs):
-        super(ChatPage, self).__init__(**kwargs)
-        self.orientation = 'vertical'
-        self.size_hint_y = 0.5  # Set a fixed height ratio (adjust as needed)
-
-        self.history = ScrollableLabel(height=Window.size[1] * 0.3, size_hint_y=None)
-        self.new_message = TextInput(width=Window.size[0] * 0.8, size_hint_x=None, height=Window.size[1] * 0.1,
-                                     size_hint_y=None, multiline=False, hint_text='Type a message here...')
-        self.send = Button(text="Send", size_hint_y=None, height=self.new_message.height)
-        self.send.bind(on_release=self.on_send_message)
-
-        bottom_line = BoxLayout(orientation='horizontal', size_hint_y=None, height=self.new_message.height)
-        bottom_line.add_widget(self.new_message)
-        bottom_line.add_widget(self.send)
-
-        self.add_widget(self.history)
-        self.add_widget(bottom_line)
-
-    def on_send_message(self, instance):
-        message = self.new_message.text
-        if message:
-            self.history.update_text(message)
-            self.new_message.text = ""
 
 class GuildScreen(Screen):
     def __init__(self, **kwargs):
@@ -74,7 +34,47 @@ class GuildScreen(Screen):
             size=(200, 50),
             pos_hint={'x': 0.7, 'y': 0.95},
         )
+        class ScrollableLabel(ScrollView):
+            text = StringProperty('')
 
+            def __init__(self, **kwargs):
+                super(ScrollableLabel, self).__init__(**kwargs)
+                self.label = Label(text='', color=(1, 0, 0, 1), font_size=(100))
+                self.label.bind(size=self._update_label)
+                self.add_widget(self.label)
+
+            def _update_label(self, instance, value):
+                self.label.text_size = (self.width, None)
+                self.label.texture_update()
+                self.height = self.label.texture_size[1]
+
+            def update_text(self, new_text):
+                self.label.text += '\n' + new_text
+
+        class ChatPage(BoxLayout):
+            def __init__(self, **kwargs):
+                super(ChatPage, self).__init__(**kwargs)
+                self.orientation = 'vertical'
+                self.size_hint_y = 0.5  # Set a fixed height ratio (adjust as needed)
+
+                self.history = ScrollableLabel(height=Window.size[1] * 0.3, size_hint_y=None)
+                self.new_message = TextInput(width=Window.size[0] * 0.8, size_hint_x=None, height=Window.size[1] * 0.1,
+                                            size_hint_y=None, multiline=False, hint_text='Type a message here...')
+                self.send = Button(text="Send", size_hint_y=None, height=self.new_message.height)
+                self.send.bind(on_release=self.on_send_message)
+
+                bottom_line = BoxLayout(orientation='horizontal', size_hint_y=None, height=self.new_message.height)
+                bottom_line.add_widget(self.new_message)
+                bottom_line.add_widget(self.send)
+
+                self.add_widget(self.history)
+                self.add_widget(bottom_line)
+
+            def on_send_message(self, instance):
+                message = self.new_message.text
+                if message:
+                    self.history.update_text(message)
+                    self.new_message.text = ""
         class ImageButtons:
             profile_button = Button(
                 background_normal='UserProfileButton.png',
