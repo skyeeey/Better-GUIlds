@@ -1,0 +1,133 @@
+from kivy.app import App
+from kivy.uix.label import Label
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.image import Image
+
+class HomeScreen(Screen):
+    def __init__(self, **kwargs):
+        super(HomeScreen, self).__init__(**kwargs)
+
+        self.add_widget(FloatLayout())
+
+        search_input = TextInput(
+            hint_text='Search for a guild...',
+            font_size=60,
+            size_hint=(None, None),
+            size=(1880, 100),
+            pos_hint={'x': 0.3, 'y': 0.95}
+        )
+
+        submit = Button(
+            text="Search",
+            font_size=60,
+            size_hint=(None, None),
+            size=(300, 100),
+            pos_hint={'x': 0.8, 'y': 0.95},
+        )
+
+        class imageButtons():
+            profileButton = Button(
+                background_normal='UserProfileButton.png',
+                pos_hint={'x': .9, 'y': 0.9},
+                size=(300, 100),
+                size_hint=(None, None)
+            )
+
+            BoardgameButton = Button(
+                color=(1, 0, .65, 1),
+                background_normal='DummyGuild.png',
+                size=(2000, 500),
+                size_hint=(None, None)
+            )
+
+            DummyGuild = Button(
+                color=(1, 0, .65, 1),
+                background_normal='ActualDummyGuild.png',
+                size=(2000, 500),
+                size_hint=(None, None)
+            )
+
+            PlankGuild = Button(
+                color=(1, 0, .65, 1),
+                background_normal='PlankGuild.png',
+                size=(2000, 500),
+                size_hint=(None, None)
+            )
+
+        class GuildBannerMenu():
+            createGuild = Button(
+                text="+ Guild",
+                font_size=100,
+                size_hint=(None, None),
+                size=(500, 200),
+                pos_hint={'x': 0.0, 'y': 0.8},
+            )
+
+            myGuilds = Button(
+                text="My Guild",
+                font_size=100,
+                size_hint=(None, None),
+                size=(500, 200),
+                pos_hint={'x': 0.0, 'y': 0.7},
+            )
+            people = Button(
+                text="My People",
+                font_size=100,
+                size_hint=(None, None),
+                size=(500, 200),
+                pos_hint={'x': 0.0, 'y': 0.6},
+            )
+
+        class ScrollableGrid(ScrollView):
+            def __init__(self, **kwargs):
+                super(ScrollableGrid, self).__init__(**kwargs)
+
+                self.layout = GridLayout(cols=1, spacing=10, size_hint_y=None)
+                self.layout.bind(minimum_height=self.layout.setter('height'))
+
+                self.layout.add_widget(imageButtons.PlankGuild)
+                self.layout.add_widget(imageButtons.BoardgameButton)
+                self.layout.add_widget(imageButtons.DummyGuild)
+
+                for i in range(7):
+                    button_text = f"Fake guild {i + 4}"
+                    btn = Button(text=button_text, size=(2000, 500), size_hint=(None, None),
+                                 background_normal='FakerGuild.png')
+                    self.layout.add_widget(btn)
+
+                self.add_widget(self.layout)
+
+        scrollable_grid = ScrollableGrid(
+            pos_hint={'x': 0.3, 'y': -0.1}
+        )
+
+        class FakeGuildButton():
+            clickable = Button(
+                text="+ Guild",
+                size_hint=(None, None),
+                size=(300, 100),
+                pos_hint={'x': 0.0, 'y': 0.8},
+            )
+
+        self.add_widget(search_input)
+        self.add_widget(submit)
+        self.add_widget(imageButtons.profileButton)
+        self.add_widget(GuildBannerMenu.createGuild)
+        self.add_widget(GuildBannerMenu.myGuilds)
+        self.add_widget(GuildBannerMenu.people)
+        self.add_widget(scrollable_grid)
+
+class HomeApp(App):
+    def build(self):
+        sm = ScreenManager()
+        sm.add_widget(HomeScreen(name='home'))
+        return sm
+
+if __name__ == '__main__':
+    HomeApp().run()
