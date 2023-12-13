@@ -14,30 +14,30 @@ class ScrollableLabel(ScrollView):
     text = StringProperty('')
 
 
-class ChatPage(BoxLayout):
-    def __init__(self, **kwargs):
-        super(ChatPage, self).__init__(**kwargs)
-        self.orientation = 'vertical'
+# class ChatPage(BoxLayout):
+#     def __init__(self, **kwargs):
+#         super(ChatPage, self).__init__(**kwargs)
+#         self.orientation = 'vertical'
 
-        self.history = ScrollableLabel(height=Window.size[1] * 0.5, size_hint_y=None)
-        self.new_message = TextInput(width=Window.size[0] * 0.8, size_hint_x=None, height=Window.size[1] * .2,
-                                     size_hint_y=None, multiline=False, hint_text = 'Type a message here...')
-        self.send = Button(text="Send")
-        self.send.bind(on_release=self.on_send_message)
+#         self.history = ScrollableLabel(height=Window.size[1] * 0.5, size_hint_y=None)
+#         self.new_message = TextInput(width=Window.size[0] * 0.8, size_hint_x=None, height=Window.size[1] * .2,
+#                                      size_hint_y=None, multiline=False, hint_text = 'Type a message here...')
+#         self.send = Button(text="Send")
+#         self.send.bind(on_release=self.on_send_message)
 
-        bottom_line = BoxLayout(orientation='horizontal')
-        bottom_line.add_widget(self.new_message)
-        bottom_line.add_widget(self.send)
+#         bottom_line = BoxLayout(orientation='horizontal')
+#         bottom_line.add_widget(self.new_message)
+#         bottom_line.add_widget(self.send)
 
-        self.add_widget(self.history)
-        self.add_widget(bottom_line)
+#         self.add_widget(self.history)
+#         self.add_widget(bottom_line)
 
-    def on_send_message(self, instance):
-        message = self.new_message.text
-        if message:
-            self.history.text.font_size =(100)
-            self.history.text += '\n' + message
-            self.new_message.text = ""
+#     def on_send_message(self, instance):
+#         message = self.new_message.text
+#         if message:
+#             self.history.text.font_size =(100)
+#             self.history.text += '\n' + message
+#             self.new_message.text = ""
 
 
 class GuildScreen(App):
@@ -122,9 +122,9 @@ class GuildScreen(App):
         view_guild_members.bind(on_release=dropdown.open)
         dropdown.bind(on_select=lambda instance, x: setattr(view_guild_members, 'text', x))
 
-        chat_screen = ChatPage(
-            pos_hint={'x': 0.3, 'y': -0.1},
-        )
+        # chat_screen = ChatPage(
+        #     pos_hint={'x': 0.3, 'y': -0.1},
+        # )
 
         history = ScrollableLabel(
             pos_hint={'x': 0.5, 'y': .5},
@@ -140,7 +140,7 @@ class GuildScreen(App):
         self.root.add_widget(GuildBannerMenu.my_guilds)
         self.root.add_widget(GuildBannerMenu.people)
         self.root.add_widget(view_guild_members)
-        self.root.add_widget(chat_screen)
+        # self.root.add_widget(chat_screen)
         self.root.add_widget(history)
 
 
