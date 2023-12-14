@@ -1,24 +1,15 @@
 from kivy.app import App
 from kivy.uix.label import Label
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.uix.button import Button
-from kivy.uix.checkbox import CheckBox
-from kivy.uix.image import Image
 from kivy.uix.textinput import TextInput
-from kivy.graphics import Color, Rectangle, Ellipse
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scrollview import ScrollView
-from kivy.uix.anchorlayout import AnchorLayout
 from kivy.properties import StringProperty
-from kivy.core.window import Window
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.button import Button
-from kivy.uix.bubble import Bubble, BubbleButton
 from kivy.core.window import Window
 from kivy.uix.dropdown import DropDown
 from kivy.uix.togglebutton import ToggleButton
+from kivy.uix.floatlayout import FloatLayout
 
 
 class ScrollableLabel(ScrollView):
@@ -44,7 +35,7 @@ class ChatPage(FloatLayout):
         self.size_hint = (1, 1)
 
         # Pre-add some initial text to the ScrollableLabel
-        initial_text = "*This is the begining of your chat with Kathy*\n"
+        initial_text = "*This is the begining of your chat with Kathy*\n"    
         self.chat_history = ScrollableLabel(initial_text=initial_text, size_hint=(.4, 0.6), pos_hint={'x': 0.01, 'y': 0.3})
         self.current_chat_history = self.chat_history
 
@@ -145,12 +136,17 @@ class GuildScreen(Screen):
 
         self.add_widget(layout)
 
-    # def submit(self, instance):
-    #     search = self.search_input.text
-    #     # Here, you can process the submitted weight and height as needed
-    #     # For example, you can print them to the console
-    #     print(f"Stuff from search bar: {search}")
+
+class MyScreenManager(ScreenManager):
+    pass
+
+
+class GuildApp(App):
+    def build(self):
+        sm = MyScreenManager()
+        sm.add_widget(GuildScreen(name='guild_screen'))
+        return sm
 
 
 if __name__ == '__main__':
-    GuildScreen().run()
+    GuildApp().run()

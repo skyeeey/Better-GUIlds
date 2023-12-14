@@ -1,0 +1,204 @@
+from kivy.app import App
+from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.properties import StringProperty
+from kivy.uix.dropdown import DropDown
+from kivy.uix.togglebutton import ToggleButton
+from kivy.core.window import Window
+
+
+class GuildScreen(Screen):
+    def __init__(self, **kwargs):
+        super(GuildScreen, self).__init__(**kwargs)
+
+        self.title = 'GuildMenu'
+        layout = FloatLayout()
+        Window.clearcolor = (0, 0, 0, 0)
+
+        search_input = TextInput(
+            hint_text='Search for a guild...',
+            size_hint=(None, None),
+            size=(770, 50),
+            pos_hint={'x': 0.3, 'y': 0.95}
+        )
+
+        submit = Button(
+            text="Search",
+            size_hint=(None, None),
+            size=(200, 50),
+            pos_hint={'x': 0.7, 'y': 0.95},
+        )
+        class ScrollableLabel(ScrollView):
+            text = StringProperty('')
+
+            def __init__(self, initial_text='', **kwargs):
+                super(ScrollableLabel, self).__init__(**kwargs)
+                self.label = Label(text=initial_text, color=(1, 0, 0, 1), font_size=(30), markup=True)
+                self.label.bind(size=self._update_label)
+                self.add_widget(self.label)
+
+            def _update_label(self, instance, value):
+                self.label.text_size = (self.width, None)
+                self.label.texture_update()
+                self.height = self.label.texture_size[1]
+
+            def update_text(self, new_text):
+                self.label.text += '\n' + new_text
+
+        class ChatPage(FloatLayout):
+            def __init__(self, **kwargs):
+                super(ChatPage, self).__init__(**kwargs)
+                self.size_hint = (1, 1)
+
+                # Pre-add some initial text to the ScrollableLabel
+                initial_text1 = "Martin: Welcome to the chat!\nHaley: How is everyone doing today?.\nOscar: I'm doing good!"
+                initial_text2 = "*You do not have permision to type in this channel*\n\nMartin: Welcome to the Announcments channel\nMartin: We are having a party at Micheals place on Friday"    
+                self.chat_history1 = ScrollableLabel(initial_text=initial_text1, size_hint=(.5, 0.5), pos_hint={'x': 0.01, 'y': 0.3})
+                self.chat_history2 = ScrollableLabel(initial_text=initial_text2, size_hint=(.5, 0.5), pos_hint={'x': 0.01, 'y': 0.3})
+                self.current_chat_history = self.chat_history1
+
+
+                self.new_message = TextInput(pos_hint={'x': 0.0, 'y': 0.0}, width=Window.size[0] * 0.8,
+                                            size_hint_x=None, height=Window.size[1] * 0.1,
+                                            size_hint_y=None, multiline=True, hint_text='Type a message here...')
+                self.send = Button(pos_hint={'x': 0.3, 'y': 0.0}, text="Send", size_hint_y=(.06), size_hint_x=(.1), height=self.new_message.height)
+                self.send.bind(on_release=self.on_send_message)
+
+                # Bind the on_text_validate event to the on_send_message function
+                self.new_message.bind(on_text_validate=self.on_send_message)
+
+                self.add_widget(self.chat_history1)
+                self.add_widget(self.new_message)
+                self.add_widget(self.send)
+
+            def on_send_message(self, instance):
+                if self.current_chat_history == self.chat_history1:
+                    message = self.new_message.text
+                    if message:
+                        prefix = "*You*: "
+                        self.chat_history1.update_text(f"{prefix}{message}")
+                        self.new_message.text = ""
+            def toggle_chat_version(self, instance):
+                if self.current_chat_history == self.chat_history1:
+                    self.remove_widget(self.chat_history1)
+                    self.add_widget(self.chat_history2)
+                    self.current_chat_history = self.chat_history2
+                else:
+                    self.remove_widget(self.chat_history2)
+                    self.add_widget(self.chat_history1)
+                    self.current_chat_history = self.chat_history1
+                    
+        class ImageButtons:
+            profile_button = Button(
+                background_normal='UserProfileButton.png',
+                pos_hint={'x': .9, 'y': 0.9},
+                size_hint=(None, None)
+            )
+
+            toggle_button = ToggleButton(
+                color=(1, 0, .65, 1),
+                background_normal='ToggleButton1.png',
+                background_down='ToggleButton2.png',
+                size=(700, 100),
+                pos_hint={'x': .35, 'y': 0.8},
+                size_hint=(None, None),
+            )
+
+            board_dimension_text_label = Label(
+                text='Board Dimension',
+                font_size=30,
+                pos_hint={'center_x': 0.5, 'center_y': 0.92}
+            )
+
+            view_guild_members = Button(
+                background_normal='DropdownMenuButton.png',
+                size=(400, 100),
+                size_hint=(None, None),
+                pos_hint={'x': 0.8, 'y': 0.8}
+            )
+
+            @staticmethod
+            def on_view_guild_members_press(instance):
+                instance.background_color = (0, 1, 0, 1)  # Change the color when pressed
+
+            @staticmethod
+            def on_view_guild_members_release(instance):
+                instance.background_color = (1, 1, 1, 1)  # Reset to the original color
+
+        class GuildBannerMenu:
+            create_guild = Button(
+                text="+ Guild",
+                font_size=(100),
+                size_hint=(None, None),
+                size=(500, 200),
+                pos_hint={'x': 0.0, 'y': 0.8},
+            )
+
+            my_guilds = Button(
+                text="My Guild",
+                font_size=(100),
+                size_hint=(None, None),
+                size=(500, 200),
+                pos_hint={'x': 0.0, 'y': 0.7},
+            )
+            people = Button(
+                text="My People",
+                font_size=(100),
+                size_hint=(None, None),
+                size=(500, 200),
+                pos_hint={'x': 0.0, 'y': 0.6},
+            )
+
+        dropdown = DropDown()
+        for index in range(10):
+            btn = Button(text=f"User {index + 1}", size_hint_y=None, height=40)
+            btn.bind(on_release=lambda btn: dropdown.select(btn.text))
+            dropdown.add_widget(btn)
+
+        ImageButtons.view_guild_members.bind(on_press=ImageButtons().on_view_guild_members_press)
+        ImageButtons.view_guild_members.bind(on_release=ImageButtons().on_view_guild_members_release)
+        dropdown.bind(on_select=lambda instance, x: setattr(ImageButtons.view_guild_members, 'text', x))
+
+        chat_screen = ChatPage(
+            pos_hint={'x': 0.3, 'y': 0.0},
+        )
+
+        history = ScrollableLabel(
+            pos_hint={'x': 0.5, 'y': 0.15},
+            size_hint=(None, None),
+            size=(Window.size[0], Window.size[1] * 0.3),
+        )
+
+
+        ImageButtons.toggle_button.bind(on_press=chat_screen.toggle_chat_version)
+
+
+        layout.add_widget(search_input)
+        layout.add_widget(submit)
+        layout.add_widget(ImageButtons.profile_button)
+        layout.add_widget(ImageButtons.toggle_button)
+        layout.add_widget(ImageButtons.board_dimension_text_label)
+        layout.add_widget(ImageButtons.view_guild_members)
+        layout.add_widget(GuildBannerMenu.create_guild)
+        layout.add_widget(GuildBannerMenu.my_guilds)
+        layout.add_widget(GuildBannerMenu.people)
+        layout.add_widget(chat_screen)
+
+        self.add_widget(layout)
+
+class MyScreenManager(ScreenManager):
+    pass
+
+class GuildApp(App):
+    def build(self):
+        sm = MyScreenManager()
+        sm.add_widget(GuildScreen(name='guild_screen'))
+        return sm
+
+if __name__ == '__main__':
+    GuildApp().run()
