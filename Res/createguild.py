@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.uix.screenmanager import Screen
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.spinner import Spinner
@@ -9,14 +10,16 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image
 
 
-class MyMobileApp(FloatLayout):
+class CreateGuild(Screen):
     def __init__(self, **kwargs):
-        super(MyMobileApp, self).__init__(**kwargs)
+        super(CreateGuild, self).__init__(**kwargs)
+
+        layout = FloatLayout()
 
         # Title Label
         title_label = Label(text='Create a new guild!', size_hint=(None, None), size=(300, 50),
                             pos_hint={'center_x': 0.5, 'top': 0.95}, font_size='50sp')
-        self.add_widget(title_label)
+        layout.add_widget(title_label)
 
         # Guild Title Input
         title1_label = Label(text='Guild Title:', size_hint=(None, None), size=(100, 50),
@@ -24,8 +27,8 @@ class MyMobileApp(FloatLayout):
         self.name_input = TextInput(hint_text='Type the title of your guild', multiline=False,
                                     size_hint=(None, None), size=(600, 100), pos_hint={'center_x': 0.5, 'top': 0.85},
                                     font_size='20sp')
-        self.add_widget(title1_label)
-        self.add_widget(self.name_input)
+        layout.add_widget(title1_label)
+        layout.add_widget(self.name_input)
 
         # Guild Description Input
         desc_label = Label(text='Guild Description:', size_hint=(None, None), size=(100, 50),
@@ -33,8 +36,8 @@ class MyMobileApp(FloatLayout):
         self.desc_input = TextInput(hint_text='Type in a description of your guild', multiline=False,
                                     size_hint=(None, None), size=(600, 100), pos_hint={'center_x': 0.5, 'top': 0.75},
                                     font_size='16sp')
-        self.add_widget(desc_label)
-        self.add_widget(self.desc_input)
+        layout.add_widget(desc_label)
+        layout.add_widget(self.desc_input)
 
         # Guild Rules Input
         rules_label = Label(text='Guild Rules:', size_hint=(None, None), size=(100, 50),
@@ -42,8 +45,8 @@ class MyMobileApp(FloatLayout):
         self.rules_input = TextInput(hint_text='Type in the rules of your guild', multiline=False,
                                      size_hint=(None, None), size=(600, 100), pos_hint={'center_x': 0.5, 'top': 0.65},
                                      font_size='18sp')
-        self.add_widget(rules_label)
-        self.add_widget(self.rules_input)
+        layout.add_widget(rules_label)
+        layout.add_widget(self.rules_input)
 
         # Logo Dropdown
         logo_label = Label(text='Guild Logo:', size_hint=(None, None), size=(100, 50),
@@ -58,19 +61,30 @@ class MyMobileApp(FloatLayout):
             font_size='25sp'
         )
         self.logo_dropdown.bind(text=self.on_spinner_select)
-        self.add_widget(logo_label)
-        self.add_widget(self.logo_dropdown)
+        layout.add_widget(logo_label)
+        layout.add_widget(self.logo_dropdown)
 
         # Image Widget for Guild Logo
         self.guild_logo_image = Image(source='', keep_ratio=True, allow_stretch=True,
                                       size_hint=(None, None), size=(300, 300), pos_hint={'center_x': 0.5, 'top': 0.45})
-        self.add_widget(self.guild_logo_image)
+        layout.add_widget(self.guild_logo_image)
 
         # Publish Guild Button
         submit_button = Button(text='Confirm Guild Details', size_hint=(None, None), size=(600, 100),
                                pos_hint={'center_x': 0.5, 'y': 0.20}, font_size='25sp')
         submit_button.bind(on_press=self.show_popup)
-        self.add_widget(submit_button)
+        layout.add_widget(submit_button)
+
+        # Back Button
+        back_button = Button(text='Back', size_hint=(None, None), size=(300, 100),
+                               pos_hint={'center_x': 0.1, 'y': 0.8}, font_size='25sp')
+        submit_button.bind(on_press=self.go_back)
+        layout.add_widget(back_button)
+
+        self.add_widget(layout)
+
+
+
 
     def on_spinner_select(self, spinner, text):
         # Set the source of the Image widget based on the selected value
@@ -84,6 +98,10 @@ class MyMobileApp(FloatLayout):
             self.guild_logo_image.source = 'rollerskates.jpg'
         elif text == "Video Game":
             self.guild_logo_image.source = 'videogame.jpg'
+
+    def go_back(self, instance):
+        # put stuff here Skye
+        x = 5
 
     def show_popup(self, instance):
         content = BoxLayout(orientation='vertical')
@@ -120,13 +138,13 @@ class MyMobileApp(FloatLayout):
         self.guild_logo_image.source = ''
 
     def on_publish_button_click(self, instance):
-        if __name__ == '__main__':
-            self.manager.current = "guild_screen"
+        # Handle publishing the guild details (currently just prints to console)
+        print("Publishing guild details")
 
 
 class MyApp(App):
     def build(self):
-        return MyMobileApp()
+        return CreateGuild()
 
 
 if __name__ == '__main__':
