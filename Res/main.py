@@ -5,9 +5,11 @@ from kivy.uix.bubble import Bubble, BubbleButton
 from kivy.uix.dropdown import DropDown
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
+from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.button import Button
 from kivy.uix.image import Image
+from kivy.uix.spinner import Spinner
 from kivy.uix.textinput import TextInput
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
@@ -16,7 +18,7 @@ from kivy.core.window import Window
 from kivy.uix.togglebutton import ToggleButton
 
 import SignIn
-from Res import NEWTESTER, bubble
+from Res import NEWTESTER, bubble, createguild
 
 
 class WelcomeScreen(Screen):
@@ -25,14 +27,15 @@ class WelcomeScreen(Screen):
 
         welcome_label = Label(
             text="Welcome to BetterGUIlds",
-            font_size=77,
+            font_size=125,
             pos_hint={'center_x': 0.5, 'center_y': 0.7}
         )
 
         start_button = Button(
             text="Start",
-            size_hint=(None, None),
-            size=(100, 80),
+            font_size=75,
+            size_hint=(0.15, 0.12),
+            size=(50, 20),
             pos_hint={'center_x': 0.5, 'y': 0.1},
             on_press=self.on_start_button_click
         )
@@ -50,36 +53,38 @@ class BubbleScreen(Screen):
 
         bubble1_text_label = Label(
             text='Guilds are a place for like-minded\npeople to come together.',
-            font_size=40,
-            pos_hint={'center_x': 0.3, 'center_y': 0.8}
+            font_size=75,
+            pos_hint={'center_x': 0.28, 'center_y': 0.8}
         )
 
         bubble2_text_label = Label(
             text='Make posts, send messages, and\nparticipate in guild events!\nAn active guild is a thriving.',
-            font_size=40,
+            font_size=75,
             pos_hint={'center_x': 0.7, 'center_y': 0.56}
         )
 
         bubble3_text_label = Label(
             text='Guild space is limited!\nMaximum size of a guild is 25 members!\nFight for your place in the '
                  'guild!\nNobody likes a spectator!',
-            font_size=40,
+            font_size=75,
             pos_hint={'center_x': 0.45, 'center_y': 0.3}
         )
 
         continue_button = Button(
             text="I'm ready to use BetterGUIlds now!",
-            size_hint=(None, None),
-            size=(580, 80),
-            pos_hint={'center_x': 0.70, 'y': 0.12},
+            font_size=66,
+            size_hint=(0.39, 0.10),
+            size=(3500, 80),
+            pos_hint={'center_x': 0.75, 'y': 0.05},
             on_press=self.on_continue_button_click
         )
 
         exit_button = Button(
             text="I'm not interested",
-            size_hint=(None, None),
-            size=(280, 80),
-            pos_hint={'center_x': 0.20, 'y': 0.12},
+            font_size=66,
+            size_hint=(0.25, 0.10),
+            size=(3500, 80),
+            pos_hint={'center_x': 0.20, 'y': 0.05},
             on_press=self.on_exit_button_click
         )
 
@@ -102,13 +107,14 @@ class NewOrReturningWindow(Screen):
 
         newOrReturning_label = Label(
             text="Are you a new or returning user?",
-            font_size=50,
+            font_size=100,
             pos_hint={'center_x': 0.5, 'center_y': 0.7}
         )
 
         new_button = Button(
             text="I am new",
-            size_hint=(None, None),
+            font_size=68,
+            size_hint=(0.2, 0.10),
             size=(300, 100),
             pos_hint={'center_x': 0.80, 'y': 0.20},
             on_press=self.on_new_button_click
@@ -116,8 +122,9 @@ class NewOrReturningWindow(Screen):
 
         returning_button = Button(
             text="I am a returning user",
-            size_hint=(None, None),
-            size=(300, 100),
+            font_size=68,
+            size_hint=(0.25, 0.10),
+            size=(420, 100),
             pos_hint={'center_x': 0.20, 'y': 0.20},
             on_press=self.on_returning_button_click
         )
@@ -139,7 +146,7 @@ class SignInWindow(Screen):
 
         create_label = Label(
             text="Sign in with your BetterGuild Account",
-            font_size=50,
+            font_size=68,
             pos_hint={'center_x': 0.5, 'center_y': 0.8}
         )
 
@@ -212,27 +219,38 @@ class CreateAnAccWindow(Screen):
 
         create_label = Label(
             text="Create an Account",
-            font_size=60,
-            pos_hint={'center_x': 0.5, 'center_y': 0.8}
+            font_size=100,
+            pos_hint={'center_x': 0.5, 'center_y': 0.85}
         )
 
         done_button = Button(
             text="Done and create an account now",
-            size_hint=(None, None),
-            size=(480, 80),
-            pos_hint={'center_x': 0.5, 'y': 0.1},
+            font_size=68,
+            size_hint=(0.35, 0.10),
+            size=(600, 80),
+            pos_hint={'center_x': 0.80, 'y': 0.1},
             on_press=self.on_done_button_click
+        )
+
+        back_button = Button(
+            text="Back",
+            font_size=68,
+            size_hint=(0.20, 0.10),
+            size=(480, 80),
+            pos_hint={'center_x': 0.20, 'y': 0.1},
+            on_press=self.on_back_button_click
         )
 
         username_text_label = Label(
             text='Create Your Username',
-            font_size=60,
+            font_size=68,
             pos_hint={'center_x': 0.3, 'center_y': 0.7}
         )
 
         # Use a TextInput for entering the description
         self.moreUN_text_input = TextInput(
             hint_text='Type here',
+            font_size=60,
             size_hint=(None, None),
             size=(600, 80),
             pos_hint={'center_x': 0.7, 'center_y': 0.7}
@@ -240,13 +258,14 @@ class CreateAnAccWindow(Screen):
 
         password_text_label = Label(
             text='Create Your Password',
-            font_size=60,
+            font_size=68,
             pos_hint={'center_x': 0.3, 'center_y': 0.5}
         )
 
         # Use a TextInput for entering the description
         self.morePW_text_input = TextInput(
             hint_text='Type here',
+            font_size=60,
             size_hint=(None, None),
             size=(600, 80),
             pos_hint={'center_x': 0.7, 'center_y': 0.5}
@@ -254,7 +273,7 @@ class CreateAnAccWindow(Screen):
 
         reenter_password_text_label = Label(
             text='Re-enter Your Password',
-            font_size=60,
+            font_size=68,
             pos_hint={'center_x': 0.3, 'center_y': 0.3}
         )
 
@@ -262,6 +281,7 @@ class CreateAnAccWindow(Screen):
         self.moreRP_text_input = TextInput(
             hint_text='Type here',
             size_hint=(None, None),
+            font_size=60,
             size=(600, 80),
             pos_hint={'center_x': 0.7, 'center_y': 0.3}
         )
@@ -274,9 +294,13 @@ class CreateAnAccWindow(Screen):
         self.add_widget(reenter_password_text_label)
         self.add_widget(self.moreRP_text_input)
         self.add_widget(done_button)
+        self.add_widget(back_button)
 
     def on_done_button_click(self, instance):
         self.manager.current = "home_screen"
+
+    def on_back_button_click(self, instance):
+        self.manager.current = "new_or_returning_window"
 
 
 class HomeScreen(Screen):
@@ -287,7 +311,7 @@ class HomeScreen(Screen):
 
         search_input = TextInput(
             hint_text='Search for a guild...',
-            font_size=60,
+            font_size=68,
             size_hint=(None, None),
             size=(1740, 100),
             pos_hint={'x': 0.3, 'y': 0.95},
@@ -295,7 +319,7 @@ class HomeScreen(Screen):
 
         submit = Button(
             text="Search",
-            font_size=60,
+            font_size=68,
             size_hint=(None, None),
             size=(300, 100),
             pos_hint={'x': 0.8, 'y': 0.95},
@@ -304,8 +328,8 @@ class HomeScreen(Screen):
         class imageButtons():
             profileButton = Button(
                 background_normal='UserProfileButton.png',
-                pos_hint={'x': .9, 'y': 0.9},
-                size=(300, 100),
+                pos_hint={'x': .91, 'y': 0.95},
+                size=(250, 100),
                 size_hint=(None, None)
             )
 
@@ -401,7 +425,7 @@ class HomeScreen(Screen):
         self.manager.current = "guild_screen"
 
     def on_create_button_click(self, instance):
-        self.manager.current = "guild_screen"
+        self.manager.current = "blank_screen"
 
     def on_guilds_button_click(self, instance):
         self.manager.current = "guild_screen"
@@ -417,20 +441,6 @@ class GuildScreen(Screen):
         self.title = 'GuildMenu'
         layout = FloatLayout()
         Window.clearcolor = (0, 0, 0, 0)
-
-        search_input = TextInput(
-            hint_text='Search for a guild...',
-            size_hint=(None, None),
-            size=(770, 50),
-            pos_hint={'x': 0.3, 'y': 0.95}
-        )
-
-        submit = Button(
-            text="Search",
-            size_hint=(None, None),
-            size=(200, 50),
-            pos_hint={'x': 0.7, 'y': 0.95},
-        )
 
         class ScrollableLabel(ScrollView):
             text = StringProperty('')
@@ -465,8 +475,8 @@ class GuildScreen(Screen):
 
                 self.new_message = TextInput(pos_hint={'x': 0.0, 'y': 0.0}, width=Window.size[0] * 0.8,
                                              size_hint_x=None, height=Window.size[1] * 0.1,
-                                             size_hint_y=None, multiline=True, hint_text='Type a message here...')
-                self.send = Button(pos_hint={'x': 0.3, 'y': 0.0}, text="Send", size_hint_y=(.06), size_hint_x=(.1),
+                                             size_hint_y=None, multiline=True, hint_text='Type a message here...', font_size=60)
+                self.send = Button(pos_hint={'x': 0.5, 'y': 0.0}, text="Send", font_size=60, size_hint_y=(.06), size_hint_x=(.1),
                                    height=self.new_message.height)
                 self.send.bind(on_release=self.on_send_message)
 
@@ -498,7 +508,8 @@ class GuildScreen(Screen):
         class ImageButtons:
             profile_button = Button(
                 background_normal='UserProfileButton.png',
-                pos_hint={'x': .9, 'y': 0.9},
+                pos_hint={'x': .91, 'y': 0.95},
+                size=(250, 100),
                 size_hint=(None, None)
             )
 
@@ -506,22 +517,22 @@ class GuildScreen(Screen):
                 color=(1, 0, .65, 1),
                 background_normal='ToggleButton1.png',
                 background_down='ToggleButton2.png',
-                size=(1200, 200),
-                pos_hint={'x': .35, 'y': 0.8},
+                size=(1600, 300),
+                pos_hint={'x': .25, 'y': 0.85},
                 size_hint=(None, None),
             )
 
             board_dimension_text_label = Label(
                 text='Guild: Board Dimension',
                 font_size=80,
-                pos_hint={'center_x': 0.55, 'center_y': 0.75}
+                pos_hint={'center_x': 0.50, 'center_y': 0.75}
             )
 
             view_guild_members = Button(
                 background_normal='DropdownMenuButton.png',
-                size=(400, 100),
+                size=(450, 100),
                 size_hint=(None, None),
-                pos_hint={'x': 0.8, 'y': 0.8}
+                pos_hint={'x': 0.82, 'y': 0.8},
             )
 
             @staticmethod
@@ -578,8 +589,6 @@ class GuildScreen(Screen):
 
         ImageButtons.toggle_button.bind(on_press=chat_screen.toggle_chat_version)
 
-        layout.add_widget(search_input)
-        layout.add_widget(submit)
         layout.add_widget(ImageButtons.profile_button)
         layout.add_widget(ImageButtons.toggle_button)
         layout.add_widget(ImageButtons.board_dimension_text_label)
@@ -592,6 +601,24 @@ class GuildScreen(Screen):
         self.add_widget(layout)
 
 
+class BlankScreen(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        readytocreate_button = Button(
+            text="create a guild now",
+            size_hint=(None, None),
+            size=(500, 80),
+            pos_hint={'center_x': 0.5, 'y': 0.1},
+            on_press=self.on_readytocreate_button_click
+        )
+
+        self.add_widget(readytocreate_button)
+
+    def on_readytocreate_button_click(self, instance):
+        self.manager.current = createguild.MyApp().run()
+
+
 class MyApp(App):
     def build(self):
         screen_manager = ScreenManager()
@@ -602,6 +629,7 @@ class MyApp(App):
         create_an_acc_window = CreateAnAccWindow(name="create_an_acc_window")
         home_screen = HomeScreen(name="home_screen")
         guild_menu = GuildScreen(name="guild_screen")
+        blank_screen = BlankScreen(name="blank_screen")
 
         screen_manager.add_widget(welcome_screen)
         screen_manager.add_widget(introduction_of_the_app)
@@ -610,9 +638,134 @@ class MyApp(App):
         screen_manager.add_widget(create_an_acc_window)
         screen_manager.add_widget(home_screen)
         screen_manager.add_widget(guild_menu)
+        screen_manager.add_widget(blank_screen)
 
         return screen_manager
 
 
 if __name__ == '__main__':
     MyApp().run()
+
+
+class GuildApp(FloatLayout):
+    def __init__(self, **kwargs):
+        super(GuildApp, self).__init__(**kwargs)
+
+        # Title Label
+        title_label = Label(text='Create a new guild!', size_hint=(None, None), size=(300, 50),
+                            pos_hint={'center_x': 0.5, 'top': 0.95}, font_size='50sp')
+        self.add_widget(title_label)
+
+        # Guild Title Input
+        title1_label = Label(text='Guild Title:', size_hint=(None, None), size=(100, 50),
+                             pos_hint={'center_x': 0.30, 'top': 0.84}, font_size='25sp')
+        self.name_input = TextInput(hint_text='Type the title of your guild', multiline=False,
+                                    size_hint=(None, None), size=(600, 100), pos_hint={'center_x': 0.5, 'top': 0.85},
+                                    font_size='20sp')
+        self.add_widget(title1_label)
+        self.add_widget(self.name_input)
+
+        # Guild Description Input
+        desc_label = Label(text='Guild Description:', size_hint=(None, None), size=(100, 50),
+                           pos_hint={'center_x': 0.30, 'top': 0.74}, font_size='25sp')
+        self.desc_input = TextInput(hint_text='Type in a description of your guild', multiline=False,
+                                    size_hint=(None, None), size=(600, 100), pos_hint={'center_x': 0.5, 'top': 0.75},
+                                    font_size='16sp')
+        self.add_widget(desc_label)
+        self.add_widget(self.desc_input)
+
+        # Guild Rules Input
+        rules_label = Label(text='Guild Rules:', size_hint=(None, None), size=(100, 50),
+                            pos_hint={'center_x': 0.30, 'top': 0.64}, font_size='25sp')
+        self.rules_input = TextInput(hint_text='Type in the rules of your guild', multiline=False,
+                                     size_hint=(None, None), size=(600, 100), pos_hint={'center_x': 0.5, 'top': 0.65},
+                                     font_size='18sp')
+        self.add_widget(rules_label)
+        self.add_widget(self.rules_input)
+
+        # Logo Dropdown
+        logo_label = Label(text='Guild Logo:', size_hint=(None, None), size=(100, 50),
+                           pos_hint={'center_x': 0.30, 'top': 0.54}, font_size='25sp')
+
+        self.logo_dropdown = Spinner(
+            text='Select a Guild Logo',
+            values=('Flower', 'Cook', 'Robot', 'Rollerskates', 'Video Game'),
+            size_hint=(None, None),
+            size=(600, 100),
+            pos_hint={'center_x': 0.5, 'top': 0.55},
+            font_size='25sp'
+        )
+        self.logo_dropdown.bind(text=self.on_spinner_select)
+        self.add_widget(logo_label)
+        self.add_widget(self.logo_dropdown)
+
+        # Image Widget for Guild Logo
+        self.guild_logo_image = Image(source='', keep_ratio=True, allow_stretch=True,
+                                      size_hint=(None, None), size=(300, 300), pos_hint={'center_x': 0.5, 'top': 0.45})
+        self.add_widget(self.guild_logo_image)
+
+        # Publish Guild Button
+        submit_button = Button(text='Confirm Guild Details', size_hint=(None, None), size=(600, 100),
+                               pos_hint={'center_x': 0.5, 'y': 0.20}, font_size='25sp')
+        submit_button.bind(on_press=self.show_popup)
+        self.add_widget(submit_button)
+
+    def on_spinner_select(self, spinner, text):
+        # Set the source of the Image widget based on the selected value
+        if text == 'Flower':
+            self.guild_logo_image.source = 'flower.jpg'
+        elif text == 'Cook':
+            self.guild_logo_image.source = 'cook.jpg'
+        elif text == "Robot":
+            self.guild_logo_image.source = 'image1.jpg'
+        elif text == "Rollerskates":
+            self.guild_logo_image.source = 'rollerskates.jpg'
+        elif text == "Video Game":
+            self.guild_logo_image.source = 'videogame.jpg'
+
+    def show_popup(self, instance):
+        content = BoxLayout(orientation='vertical')
+
+        popup_label = Label(
+            text=f"\n\nName: {self.name_input.text}\n\nDescription: {self.desc_input.text}\n\nRules: {self.rules_input.text}\n\nLogo: {self.logo_dropdown.text}",
+            size_hint=(None, None), size=(600, 600))
+        content.add_widget(popup_label)
+
+        # Add some spacing
+        content.add_widget(Label(size_hint_y=None, height=20))
+
+        # Add 'Close' Button in Popup
+        close_button = Button(text="Close", size_hint=(None, None), size=(100, 50),
+                              pos_hint={'center_x': 0.12, 'y': 0.90})
+        close_button.bind(on_press=self.reset_entries)
+        content.add_widget(close_button)
+
+        # Add 'Publish Guild' in Popup
+        publish_button = Button(text="Publish Guild", size_hint=(None, None), size=(250, 50),
+                                pos_hint={'center_x': 0.82, 'y': 0.10}, on_press=self.on_publish_button_click)
+        content.add_widget(publish_button)
+
+        popup = Popup(title="Guild Details", content=content, size_hint=(None, None), size=(900, 700))
+        close_button.bind(on_press=popup.dismiss)
+        popup.open()
+
+    def reset_entries(self, instance):
+        # Reset text inputs and spinner
+        self.name_input.text = ''
+        self.desc_input.text = ''
+        self.rules_input.text = ''
+        self.logo_dropdown.text = 'Select Guild Logo'
+        self.guild_logo_image.source = ''
+
+    def on_publish_button_click(self, instance):
+        if __name__ == '__main__':
+            MyApp.manager.current = 'guild_menu'
+
+
+class CreateGuild(App):
+    def build(self):
+        return GuildApp()
+
+
+if __name__ == '__main__':
+    CreateGuild().run()
