@@ -1,4 +1,3 @@
-import self as self
 from kivy.app import App
 from kivy.properties import StringProperty
 from kivy.uix.bubble import Bubble, BubbleButton
@@ -18,7 +17,7 @@ from kivy.core.window import Window
 from kivy.uix.togglebutton import ToggleButton
 
 import SignIn
-from Res import NEWTESTER, bubble, createguild
+
 
 
 class WelcomeScreen(Screen):
