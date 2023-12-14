@@ -1,3 +1,4 @@
+import self
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -21,14 +22,37 @@ from kivy.core.window import Window
 from Res import createguild
 
 
-class HomeScreen(App):
-    class HomeScreen(Screen):
+class CreateGuild(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
-        def __init__(self, **kwargs):
-            super().__init__(kwargs)
-            # self.on_addGuild_button_click = createguild.MyApp().run()
+        create_button = Button(
+            text="Ready to Create",
+            size_hint=(None, None),
+            size=(500, 80),
+            pos_hint={'center_x': 0.5, 'y': 0.1},
+            on_press=self.on_create_button_click
+        )
+
+        self.add_widget(create_button)
+
+    def on_create_button_click(self, instance):
+        self.manager.current = createguild.MyApp().run()
+
+
+class HomeScreen(App):
+
+    # def __init__(self, **kwargs):
+    #     super().__init__(kwargs)
 
     def build(self):
+        screen_manager = ScreenManager()
+        create_guild = CreateGuild(name="create_guild")
+
+        screen_manager.add_widget(create_guild)
+
+        return screen_manager
+
         self.title = 'Home Screen'
         self.root = FloatLayout()
         Window.clearcolor = (0, 0, 0, 0)
@@ -89,8 +113,11 @@ class HomeScreen(App):
                 size_hint=(None, None),
                 size=(500, 200),
                 pos_hint={'x': 0.0, 'y': 0.8},
-                # on_press=self.submit
+                on_press="create_guild"
             )
+
+            def on_addGuild_button_click(self, instance):
+                self.manager.current = createguild.MyApp().run()
 
             myGuilds = Button(
                 text="My Guild",
@@ -165,11 +192,14 @@ class HomeScreen(App):
         self.root.add_widget(GuildBannerMenu.people)
         self.root.add_widget(scrollable_grid)
 
+
+
     # def submit(self, instance):
     #     search = self.search_input.text
     #     # Here, you can process the submitted weight and height as needed
     #     # For example, you can print them to the console
     #     print(f"Stuff from search bar: {search}")
+
 
 # class BoardDimension(Screen):
 #     def __init__(self, **kwargs):

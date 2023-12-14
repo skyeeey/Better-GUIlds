@@ -7,7 +7,8 @@ from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image
- 
+
+
 class MyMobileApp(FloatLayout):
     def __init__(self, **kwargs):
         super(MyMobileApp, self).__init__(**kwargs)

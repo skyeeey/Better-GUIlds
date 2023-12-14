@@ -35,7 +35,7 @@ class ChatPage(BoxLayout):
     def on_send_message(self, instance):
         message = self.new_message.text
         if message:
-            self.history.text.font_size =(100)
+            # self.history.text.font_size =(100)
             self.history.text += '\n' + message
             self.new_message.text = ""
 
@@ -135,7 +135,7 @@ class GuildScreen(App):
         self.root.add_widget(ImageButtons.profile_button)
         self.root.add_widget(ImageButtons.toggle_button)
         self.root.add_widget(ImageButtons.board_dimension_text_label)
-        self.root.add_widget(ImageButtons.chat_button)
+        # self.root.add_widget(ImageButtons.chat_button)
         self.root.add_widget(GuildBannerMenu.create_guild)
         self.root.add_widget(GuildBannerMenu.my_guilds)
         self.root.add_widget(GuildBannerMenu.people)
