@@ -2,6 +2,11 @@
 MAKE SURE YOU RUN THIS PROGRAM IN FULLSCREEN
 
 
+
+
+
+
+
 1)Set up the Anaconda prompt as seen in steps 1-3 here: https://docs.google.com/document/d/1NEGeA6ZXVZtxUpOV9Y9YWCi8SSpugYmr9qDOCBLfDJM/edit#heading=h.hs65dkkf0u4t
 
 2)Once you have Python Kivy and the Anaconda prompt  installed, please click this link to access our code repository: https://github.com/skyeeey/Better-GUIlds/tree/main
