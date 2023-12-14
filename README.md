@@ -29,3 +29,5 @@ dir
 
 8)This should open our interface
 
+9) This program looks best at 1440x900 on Mac
+
